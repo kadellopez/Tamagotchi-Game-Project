@@ -1,9 +1,9 @@
 /*-------------- Constants -------------*/
-state = [
-   {boredom: 0 },
-   {hunger: 0},
-   {sleepiness: 0}
-]
+let state = {
+   boredom: 0,
+   hunger: 0,
+   sleepiness: 0
+}
 
 /*---------- Variables (state) ---------*/
 let timer;
@@ -27,38 +27,31 @@ const resetButton = document.querySelector('#restart')
 /*-------------- Functions -------------*/
 
 
-const init = () => {
-    //let gameOver = false;
-    const timer = setInterval(runGame, 2000)
+let init = () => {
+    let gameOver = false;
+    let timer = setInterval(runGame, 2000)
     //console.log(init)
 }
-
-const runGame = () => {
-    //console.log('Game Running')
-    updateStates()
-    render()
-}
-
-render = () => {
+let render = () => {
     boredomStat.textContent = state.boredom;
     hungerStat.textContent = state.hunger;
     sleepinessStat.textContent = state.sleepiness;
   }
-
-const updateStates = (value) => {
+let updateStates = (value) => {
     if(state[value] === 0);
-    state[value] = Math.floor(Math.random() * 4) 
-    console.log(state[value])
+    state[value] = Math.floor(Math.random() *4)
+    //console.log(state[value])
 }
 
-// const render = () => {
-    
-// }
+let runGame = () => {
+    //console.log('Game Running')
+    updateStates('boredom')
+    updateStates('hunger')
+    updateStates('sleepiness')
+    render()
+}
 
 init()
 render()
-
-
-
 
 /*----------- Event Listeners ----------*/
