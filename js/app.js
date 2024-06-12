@@ -7,7 +7,7 @@ let state = {
 
 /*---------- Variables (state) ---------*/
 let timer;
-let gameOver;
+let gameOver = false;
 
 /*----- Cached Element References  -----*/
 const boredomStat = document.querySelector('#boredom-stat')
@@ -16,8 +16,8 @@ const sleepinessStat = document.querySelector('#sleepiness-stat')
 
 
 const playButton = document.querySelector('#play')
-const feedButton = document.querySelector('feed')
-const sleepButton = document.querySelector('sleep')
+const feedButton = document.querySelector('#feed')
+const sleepButton = document.querySelector('#sleep')
 
 const gameMsg = document.querySelector('#message')
 const resetButton = document.querySelector('#restart')
@@ -28,26 +28,50 @@ const resetButton = document.querySelector('#restart')
 
 
 let init = () => {
-    let gameOver = false;
-    let timer = setInterval(runGame, 2000)
-    //console.log(init)
+    timer = setInterval(runGame, 2000)
 }
+
 let render = () => {
     boredomStat.textContent = state.boredom;
     hungerStat.textContent = state.hunger;
-    sleepinessStat.textContent = state.sleepiness;
-  }
-let updateStates = (value) => {
-    if(state[value] === 0);
-    state[value] = Math.floor(Math.random() *4)
-    //console.log(state[value])
+    sleepinessStat.textContent = state.sleepiness; 
+    
+    if(gameOver === true) {
+        clearInterval(timer)
+    }
+}
+
+let updateStates = () => {
+    if (!gameOver) {
+        if (Math.random() < 0.5) { 
+            state.boredom++
+        }
+        if (Math.random() < 0.5) {
+            state.hunger++
+        }
+        if (Math.random() < 0.5) {
+            state.sleepiness++
+        }
+    }
+}
+
+const checkGameOver = () => {
+    if(state.boredom === 10) {
+        gameOver = true
+    }
+    if(state.hunger === 10) {
+        gameOver = true
+    }
+    if(state.sleepiness === 10) {
+        gameOver = true
+    }
 }
 
 let runGame = () => {
-    //console.log('Game Running')
     updateStates('boredom')
     updateStates('hunger')
     updateStates('sleepiness')
+    checkGameOver()
     render()
 }
 
