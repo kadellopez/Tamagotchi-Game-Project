@@ -1,15 +1,12 @@
-/*-------------- Constants -------------*/
+
 let state = {
    boredom: 0,
    hunger: 0,
    sleepiness: 0
 }
-
-/*---------- Variables (state) ---------*/
 let timer;
 let gameOver = false;
 
-/*----- Cached Element References  -----*/
 const boredomStat = document.querySelector('#boredom-stat')
 const hungerStat = document.querySelector('#hunger-stat')
 const sleepinessStat = document.querySelector('#sleepiness-stat')
@@ -20,12 +17,6 @@ const sleepButton = document.querySelector('#sleep')
 
 const gameMsg = document.querySelector('#message')
 const resetButton = document.querySelector('#restart')
-
-
-
-
-/*-------------- Functions -------------*/
-
 
 const init = () => {
     gameMsg.classList.add('hidden')
@@ -118,8 +109,6 @@ const sleepButtonClick = () => {
 
 init()
 render()
-
-/*----------- Event Listeners ----------*/
 
 playButton.addEventListener('click', playButtonClick)
 feedButton.addEventListener('click', feedButtonClick)
