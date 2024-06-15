@@ -13,11 +13,15 @@
 
 ### Made with HTML, CSS, and Javascript
 
-## Instructions
+
+
+## Site link: https://kadellopez.github.io/Tamagotchi-Game-Project/
+
+### Instructions
 1. upon loading the page the game will start updating three statuses at random incrementing their value by one at an interval
 2. click any of the three buttons to bring that value back down to zero
 3. the game will end if any of the three statuses reach a value of 10
 
-## Future goals
+### Future goals
 1. remove a bug that has status number values exceed 10 after a few restarts
 2. make the app more alive 
