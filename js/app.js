@@ -14,7 +14,6 @@ const boredomStat = document.querySelector('#boredom-stat')
 const hungerStat = document.querySelector('#hunger-stat')
 const sleepinessStat = document.querySelector('#sleepiness-stat')
 
-
 const playButton = document.querySelector('#play')
 const feedButton = document.querySelector('#feed')
 const sleepButton = document.querySelector('#sleep')
@@ -24,14 +23,27 @@ const resetButton = document.querySelector('#restart')
 
 
 
+
 /*-------------- Functions -------------*/
 
 
-let init = () => {
+const init = () => {
+    gameMsg.classList.add('hidden')
+    gameMsg.classList.remove('visible')
+    resetButton.classList.add('hidden')
+    resetButton.classList.remove('visible')
+    
+    gameOver = false
+
+    state.boredom = 0
+    state.hunger = 0
+    state.sleepiness = 0
+
     timer = setInterval(runGame, 2000)
+
 }
 
-let render = () => {
+const render = () => {
     boredomStat.textContent = state.boredom;
     hungerStat.textContent = state.hunger;
     sleepinessStat.textContent = state.sleepiness; 
@@ -39,9 +51,23 @@ let render = () => {
     if(gameOver === true) {
         clearInterval(timer)
     }
+
+    if(gameOver === true) {
+        if (gameMsg.classList.contains('hidden')) {
+            gameMsg.classList.remove('hidden')
+            gameMsg.classList.add('visible')
+        }
+    }
+
+    if(gameOver === true) {
+        if (resetButton.classList.contains('hidden')) {
+            resetButton.classList.remove('hidden')
+            resetButton.classList.add('visible')
+        }
+    }
 }
 
-let updateStates = () => {
+const updateStates = () => {
     if (!gameOver) {
         if (Math.random() < 0.5) { 
             state.boredom++
@@ -67,7 +93,7 @@ const checkGameOver = () => {
     }
 }
 
-let runGame = () => {
+const runGame = () => {
     updateStates('boredom')
     updateStates('hunger')
     updateStates('sleepiness')
@@ -75,7 +101,27 @@ let runGame = () => {
     render()
 }
 
+const playButtonClick = () => {
+    state.boredom = 0
+    render()
+}
+
+const feedButtonClick = () => {
+    state.hunger = 0
+    render()
+}
+
+const sleepButtonClick = () => {
+    state.sleepiness = 0
+    render()
+}
+
 init()
 render()
 
 /*----------- Event Listeners ----------*/
+
+playButton.addEventListener('click', playButtonClick)
+feedButton.addEventListener('click', feedButtonClick)
+sleepButton.addEventListener('click', sleepButtonClick)
+resetButton.addEventListener('click', init)
